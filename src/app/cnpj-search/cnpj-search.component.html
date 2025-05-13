@@ -1,0 +1,52 @@
+<div class="container">
+    <div class="form-container">
+        <h2>Consulta CNPJ</h2>
+        <form (ngSubmit)="buscarCnpj()">
+            <div class="form-group">
+                <label for="cnpj">CNPJ</label>
+                <input type="text" id="cnpj" name="cnpj" [(ngModel)]="cnpj" placeholder="Digite o CNPJ" required [mask]="'00.000.000/0000-00'" />
+            </div>
+
+            <button type="submit" class="btn-consultar">Consultar</button>
+
+            <div *ngIf="errorMessage" class="error-message">{{ errorMessage }}</div>
+        </form>
+    </div>
+    <div class="cnpj-card" *ngIf="empresa">
+        <h2>{{ empresa.nome }}</h2>
+        <p><strong>Fantasia:</strong> {{ empresa.fantasia }}</p>
+        <p><strong>CNPJ:</strong> {{ empresa.cnpj }}</p>
+        <p><strong>Situação:</strong> {{ empresa.situacao }}</p>
+        <p><strong>Tipo:</strong> {{ empresa.tipo }}</p>
+        <p><strong>Abertura:</strong> {{ empresa.abertura }}</p>
+        <p><strong>Natureza Jurídica:</strong> {{ empresa.natureza_juridica }}</p>
+        <p><strong>Porte:</strong> {{ empresa.porte }}</p>
+
+        <div class="address">
+            <h3>Endereço</h3>
+            <p>{{ empresa.logradouro }}, {{ empresa.numero }} - {{ empresa.bairro }}</p>
+            <p>{{ empresa.municipio }} - {{ empresa.uf }} - CEP: {{ empresa.cep }}</p>
+        </div>
+
+        <div class="atividades">
+            <h3>Atividade Principal</h3>
+            <p>{{ empresa.atividade_principal[0]?.text }}</p>
+
+            <h3>Atividades Secundárias</h3>
+            <ul>
+                <li *ngFor="let atividade of empresa.atividades_secundarias">
+                    {{ atividade.text }}
+                </li>
+            </ul>
+        </div>
+
+        <div class="qsa">
+            <h3>Quadro Societário (QSA)</h3>
+            <ul>
+                <li *ngFor="let socio of empresa.qsa">
+                    {{ socio.nome }} - {{ socio.qual }}
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>

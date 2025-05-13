@@ -1,0 +1,8 @@
+{
+  "/v1": {
+    "target": "https://www.receitaws.com.br",
+    "secure": false,
+    "changeOrigin": true,
+    "logLevel": "debug"
+  }
+}
